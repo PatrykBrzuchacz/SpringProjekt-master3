@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+
+</head>
+<body>
+   <a href="#" th:href="@{/register}">Register</a>
+  <div th:if="not ${uzytkownicy.isEmpty()}">
+        <h1>All registered times:</h1>
+        <table border="1">
+        <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>update></th>
+            </tr>
+   	<tr th:each="uzytkownic : ${uzytkownicy}" >
+
+                <td th:text="${uzytkownic.firstName}">John</td>
+                <td th:tetx="${uzytkownic.lastName}">Kowalski</td>
+                <td th:text="${uzytkownic.email}">usee@interia.pl</td>
+               <td>    
+    <a th:href="${'/admin/edit/' + uzytkownic.id}"><span>edit</span></a>
+    </td>
+        <td><a th:href="${'/admin/delete/' + uzytkownic.id}"><span>delete</span></a>
+</td>
+           </tr>
+        </table>
+        </div>
+         <div th:if="${uzytkownicy.isEmpty()}">
+        <h1>There is no data yet :(</h1>
+    </div>
+</html>
