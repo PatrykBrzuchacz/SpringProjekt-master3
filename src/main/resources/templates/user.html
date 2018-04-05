@@ -5,19 +5,21 @@
 </head>
 <body>
 
-<div class="container">
 
-    <div class="starter-template">
         <h1>User page (Spring Security protected)</h1>
 
+ <p>	<a href="#" th:href="@{'/user/aboutme/' + ${user.id}}">about me</a></p>
+	<p>	<a href="#" th:href="@{'/user/adddetails/' + ${user.id}}">add details</a> </p>
+		<a href="#" th:href="@{/logmeout}">log out</a>
+	
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form>
+        
 
-    </div>
 
-</div>
+
 
 
 </body>

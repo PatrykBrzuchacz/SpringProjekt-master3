@@ -7,8 +7,8 @@
 <body>
 
 	<h1>Thanks for registration!</h1>
-	<a href="#" th:href="@{/logmeout}">Go to homepage</a>
-	<a href="#" th:href="${'/user/aboutme/' + user.id}">about me</a>
-		<a href="#" th:href="${'/user/adddetails/' + user.id}">add details</a>
+	<a href="#" th:href="@{/logmeout}">log out</a>
+<p>	<a href="#" th:href="${'/user/aboutme/' + user.id}">about me</a></p>
+	<p>	<a href="#" th:href="${'/user/adddetails/' + user.id}">add details</a> </p>
 </body>
 </html>

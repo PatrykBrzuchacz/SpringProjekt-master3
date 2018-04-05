@@ -14,7 +14,8 @@ public interface UserService {
 	ArrayList<User> findAll();
 	User findByEmail(String email);
 User saveUser(User user);
-User getUserById(int id);
+User getUserById(Integer id);
 void addDetails(User user);
 	public void deleteUser(int id);
+
 }
