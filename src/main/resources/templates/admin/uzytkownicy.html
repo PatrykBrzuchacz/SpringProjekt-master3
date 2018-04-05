@@ -5,6 +5,9 @@
 
 </head>
 <body>
+    <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
    <a href="#" th:href="@{/register}">Register</a>
   <div th:if="not ${uzytkownicy.isEmpty()}">
         <h1>All registered times:</h1>
@@ -18,7 +21,7 @@
    	<tr th:each="uzytkownic : ${uzytkownicy}" >
 
                 <td th:text="${uzytkownic.firstName}">John</td>
-                <td th:tetx="${uzytkownic.lastName}">Kowalski</td>
+                <td th:text="${uzytkownic.lastName}">Kowalski</td>
                 <td th:text="${uzytkownic.email}">usee@interia.pl</td>
                <td>    
     <a th:href="${'/admin/edit/' + uzytkownic.id}"><span>edit</span></a>

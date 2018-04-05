@@ -13,7 +13,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
+	@Autowired
+	private AccessDeniedHandler accessDenied;
 
 	@Bean
 	public UserDetailsService customUserDetailsService() {
@@ -42,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin().loginPage("/login").permitAll().and().logout().logoutUrl("/logout")
 	                .logoutSuccessUrl("/")
-	                .permitAll();
-	
+	                .permitAll()
+		.and()
+        .exceptionHandling().accessDeniedHandler(accessDenied);
 }}

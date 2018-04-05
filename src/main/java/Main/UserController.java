@@ -29,8 +29,9 @@ public class UserController {
 		model.addAttribute("user", new User());
 		return "registerForm";
 	}
+	
 	@PostMapping("/register")
-	public String addUser(@ModelAttribute @Valid User user,
+	public String addUser(@Valid @ModelAttribute User user,
 			BindingResult bindResult) {
 		if(bindResult.hasErrors())
 			return "registerForm";
@@ -63,8 +64,7 @@ public class UserController {
 }
 @GetMapping("user/aboutme/{id}")
 public String about(@PathVariable Integer id, Model m) {
-	User uzytkownicy= userService.getUserById(id);
-	m.addAttribute("uzytkownicy", uzytkownicy);
+	 m.addAttribute("user", userService.getUserById(id));
 	return "user/aboutme";
 }
   
@@ -73,11 +73,25 @@ public String addDetails(@PathVariable Integer id, Model m) {
 	 m.addAttribute("user", userService.getUserById(id));
     return "user/details";
 }
-
+@GetMapping("/user/{id}")
+public String user(@PathVariable Integer id, Model m) {
+	 m.addAttribute("user", userService.getUserById(id));
+	return "user";
+}
+/*@PostMapping("/login/{id}")
+public String loginn(@PathVariable Integer id, Model m) {
+	User user =  userService.getUserById(id);
+	m.addAttribute("user", user);
+	return "redirect:/user/" + user.getId();
+}*/
 @PostMapping("/adding")
 public String saveDetails(User user) {
-    userService.saveUser(user);
-
-    return "redirect:/";
+	 User updatingUser = userService.getUserById(user.getId());
+	    updatingUser.setMobileNumber(user.getMobileNumber());
+	    updatingUser.setNationality(user.getNationality());
+	    updatingUser.setGender(user.getGender());
+	    userService.saveUser(updatingUser);
+	    return "redirect:/";
+  
 }
 }

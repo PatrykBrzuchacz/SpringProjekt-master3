@@ -39,10 +39,6 @@ UserDao userdao;
 	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
-public User getUserById(int id)
-{
-return userRepository.getOne(id);	
-}
 
 public void deleteUser(int id) {
 	userRepository.deleteById(id);
@@ -51,5 +47,12 @@ public void deleteUser(int id) {
 public void addDetails(User user) {
 	userRepository.save(user);
 }
+
+@Override
+public User getUserById(Integer id) {
+	return userRepository.getUserById(id);
+}
+
+
 
 	}

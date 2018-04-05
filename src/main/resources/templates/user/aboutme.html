@@ -4,7 +4,10 @@
     <title>Spring Security Example </title>
 
 </head>
-<body>
+<body>  
+  <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
 
         <h1>All registered times:</h1>
          <input type="hidden" th:field="${user.id}"/>
@@ -18,7 +21,7 @@
    	<tr>
 
                 <td th:text="${user.firstName}">John</td>
-                <td th:tetx="${user.lastName}">Kowalski</td>
+                <td th:text="${user.lastName}">Kowalski</td>
                 <td th:text="${user.email}">usee@interia.pl</td>
            
   
