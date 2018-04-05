@@ -1,10 +1,12 @@
 
-package Main;
+package Main.service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetails;
+
+import Main.model.User;
 
 
 

@@ -1,4 +1,4 @@
-package Main;
+package Main.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import Main.model.User;
+import Main.model.UserRole;
+import Main.repository.UserRepository;
+import Main.repository.UserRoleRepository;
+import dao.UserDao;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -15,8 +21,7 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 	@Autowired
 	private UserRoleRepository roleRepository;
-@Autowired
-UserDao userdao;
+
 
 
 	public void addWithDefaultRole(User user) {

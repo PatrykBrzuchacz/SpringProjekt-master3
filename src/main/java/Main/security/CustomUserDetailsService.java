@@ -1,4 +1,4 @@
-package Main;
+package Main.security;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +9,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import Main.model.User;
+import Main.model.UserRole;
+import Main.repository.UserRepository;
 
 
 
