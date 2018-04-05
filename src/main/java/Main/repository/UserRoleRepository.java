@@ -1,6 +1,8 @@
-package Main;
+package Main.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import Main.model.UserRole;
 
 
 

@@ -1,4 +1,4 @@
-package Main;
+package dao;
 
 public class UserValidator {
 

@@ -1,4 +1,4 @@
-package Main;
+package Main.web.controller;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import Main.model.User;
+import Main.service.UserService;
 
 @Controller
 public class UserController {
