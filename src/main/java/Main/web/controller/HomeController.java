@@ -22,11 +22,8 @@ public class HomeController {
 	public String secured() {
 		return "secured page";
 	}
-	@RequestMapping("/login")
-	public String login() {
-		
-	    return "login";
-	}
+
+	
 	@GetMapping("/about")
 	public  String about() {
 		return "about";

@@ -10,5 +10,5 @@ import Main.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	User getUserById(Integer id);
 	User findByEmail(String email);
-	
+
 }

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -16,11 +19,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import Main.model.User;
+import Main.repository.UserRepository;
 import Main.service.UserService;
 
 @Controller
 public class UserController {
-	
+	@Autowired
+	private UserRepository userRepo;
 	private UserService userService;
 		@Autowired
 	public void setUserService(UserService userService) {
@@ -76,9 +81,11 @@ public String addDetails(@PathVariable Integer id, Model m) {
 	 m.addAttribute("user", userService.getUserById(id));
     return "user/details";
 }
-@GetMapping("/user/{id}")
-public String user(@PathVariable Integer id, Model m) {
-	 m.addAttribute("user", userService.getUserById(id));
+@GetMapping("/user")
+public String user(Model m) {
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    
+	 m.addAttribute("user", userRepo.findByEmail(auth.getName()));
 	return "user";
 }
 /*@PostMapping("/login/{id}")
@@ -94,7 +101,7 @@ public String saveDetails(User user) {
 	    updatingUser.setNationality(user.getNationality());
 	    updatingUser.setGender(user.getGender());
 	    userService.saveUser(updatingUser);
-	    return "redirect:/";
+	    return "redirect:/user";
   
 }
 }
