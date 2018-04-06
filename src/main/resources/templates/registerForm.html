@@ -14,8 +14,11 @@
         <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name errors</p>
 		<input th:field="*{lastName}" placeholder="Last Name" /><br />
 		 <br />
-         <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email errors</p>
+			<div th:each="error : ${#fields.errors('email')}">
+								<h6  type="text" th:text="'*' +${error}">...</h6>
+							</div>
 		<input th:field="*{email}" type="email" placeholder="Email" />
+
 		<br />
 		
 		 <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password errors</p>

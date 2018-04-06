@@ -1,6 +1,7 @@
 package Main.web.controller;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
@@ -17,13 +18,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import Main.Validation.RegisterFormValidator;
 import Main.model.User;
 import Main.repository.UserRepository;
 import Main.service.UserService;
 
+
+
 @Controller
 public class UserController {
+	private static Logger log = Logger.getLogger(UserController.class.getName());
+	@Autowired
+	private RegisterFormValidator validator;
 	@Autowired
 	private UserRepository userRepo;
 	private UserService userService;
@@ -39,11 +47,17 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public String addUser(@Valid @ModelAttribute User user,
-			BindingResult bindResult) {
-		if(bindResult.hasErrors())
+	public String addUser(@ModelAttribute("user") User user,
+			BindingResult result, RedirectAttributes redAtt) {
+	validator.validate(user, result);
+	if(result.hasErrors()) {
+		log.info("Formularz rejestracyjny - NIE przeszedł walidacji");
 			return "registerForm";
+			}
 		else {
+			
+			log.info("Formularz rejestracyjny - przeszedł walidacje");
+			log.info(user.toString());
 			userService.addWithDefaultRole(user);
 			return "registerSuccess";
 		}}
@@ -77,7 +91,7 @@ public String about(@PathVariable Integer id, Model m) {
 }
   
 @GetMapping("user/adddetails/{id}")
-public String addDetails(@PathVariable Integer id, Model m) {
+public String addDetails(@PathVariable Integer id, Model m ) {
 	 m.addAttribute("user", userService.getUserById(id));
     return "user/details";
 }
@@ -95,7 +109,16 @@ public String loginn(@PathVariable Integer id, Model m) {
 	return "redirect:/user/" + user.getId();
 }*/
 @PostMapping("/adding")
-public String saveDetails(User user) {
+public String saveDetails(User user		,BindingResult result, RedirectAttributes redAtt) {
+	validator.validate(user, result);
+	if(result.hasErrors()) {
+		log.info("Formularz rejestracyjny - NIE przeszedł walidacji");
+			return "user/details";
+			}
+		else {
+			
+			log.info("Formularz rejestracyjny - przeszedł walidacje");
+			log.info(user.toString());
 	 User updatingUser = userService.getUserById(user.getId());
 	    updatingUser.setMobileNumber(user.getMobileNumber());
 	    updatingUser.setNationality(user.getNationality());
@@ -104,4 +127,4 @@ public String saveDetails(User user) {
 	    return "redirect:/user";
   
 }
-}
+}}

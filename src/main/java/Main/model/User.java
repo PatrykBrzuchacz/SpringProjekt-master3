@@ -25,14 +25,11 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotEmpty(message= "imie nie moze byc puste")
 	private String firstName;
-	@NotEmpty(message= "nazwisko nie moze byc puste")
 	private String lastName;
-	@Email
-	
+
 	private String email;
-	@Size(min=4, max=12, message="haslo musi posiadac od 4 do 12 znakow")
+
 	private String password;
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Set<UserRole> roles = new HashSet<>();
