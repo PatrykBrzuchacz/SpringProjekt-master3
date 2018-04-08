@@ -109,16 +109,8 @@ public String loginn(@PathVariable Integer id, Model m) {
 	return "redirect:/user/" + user.getId();
 }*/
 @PostMapping("/adding")
-public String saveDetails(User user		,BindingResult result, RedirectAttributes redAtt) {
-	validator.validate(user, result);
-	if(result.hasErrors()) {
-		log.info("Formularz rejestracyjny - NIE przeszedł walidacji");
-			return "user/details";
-			}
-		else {
-			
-			log.info("Formularz rejestracyjny - przeszedł walidacje");
-			log.info(user.toString());
+public String saveDetails(User user) {
+
 	 User updatingUser = userService.getUserById(user.getId());
 	    updatingUser.setMobileNumber(user.getMobileNumber());
 	    updatingUser.setNationality(user.getNationality());
@@ -127,4 +119,4 @@ public String saveDetails(User user		,BindingResult result, RedirectAttributes r
 	    return "redirect:/user";
   
 }
-}}
+}
